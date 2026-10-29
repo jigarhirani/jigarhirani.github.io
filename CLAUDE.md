@@ -9,7 +9,8 @@ points at GitHub Pages (four A records, `www` CNAME).
 
 | Path | What it is |
 |---|---|
-| `index.html` | The home page: hero with the pipeline diagram, stages, experience and toolbox, certification badges, writing, contact |
+| `index.html` | The home page: a profile card (bio, connect links, Credly badges, toolbox) over a scrolling log-stream background. Styles in `assets/card.css` on top of `site.css` |
+| `portfolio/index.html` | The full site: hero with the pipeline diagram, stages, experience and toolbox, certification badges, writing, contact. Linked from the card's "Full portfolio" |
 | `blog/index.html` | Post list |
 | `blog/<slug>/index.html` | One post, hand-written HTML |
 | `assets/site.css` | All styles. Colours are tokens on `:root`, with a dark set under `prefers-color-scheme` |
@@ -22,12 +23,12 @@ points at GitHub Pages (four A records, `www` CNAME).
 ## Common changes
 
 - **New post:** copy `blog/starting-this-blog/` to `blog/<slug>/`, edit it, then add a
-  `.post` card to `blog/index.html` and to the Writing section of `index.html`.
+  `.post` card to `blog/index.html` and to the Writing section of `portfolio/index.html`.
   SPL in a `<pre><code>` block: wrap commands and keywords in `<span class="k">`.
 - **Certification passed:** earned badges are the real Credly images. The user's
   public profile is `https://www.credly.com/users/jigarhirani/badges.json`; take the
   new badge's `image_url` and `id` from it. Save the image at 240 px
-  (`sips -Z 240`) in `assets/badges/`, then copy the earned `<li>` in `index.html`:
+  (`sips -Z 240`) in `assets/badges/`, then copy the earned `<li>` in `portfolio/index.html` (and the `.certs` `<li>` on the card in `index.html`):
   class `earned`, `<a class="medal">` wrapping the `<img>`, and both links to
   `https://www.credly.com/badges/<id>/public_url`. In-progress certs are a dashed
   `div.medal` placeholder; never show an official badge image for a cert not yet earned.

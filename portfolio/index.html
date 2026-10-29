@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jigar Hirani · Splunk &amp; SIEM Engineer</title>
+  <meta name="description" content="Splunk and SIEM engineer. I run large Splunk environments and build Cribl and Ingest Processor pipelines that cut ingest without losing a field.">
+  <link rel="canonical" href="https://jigarhirani.tech/portfolio/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jigar Hirani · Splunk &amp; SIEM Engineer">
+  <meta property="og:description" content="I build the path between raw logs and the SIEM: collect it, shape it, cut what nobody searches, and keep every field the security team needs.">
+  <meta property="og:url" content="https://jigarhirani.tech/portfolio/">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <a class="mark" href="/">jigar<span>/</span>hirani</a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certs</a>
+      <a href="#writing">Writing</a>
+    </nav>
+    <a class="resume" href="/assets/Jigar-Hirani-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume (PDF, opens in a new tab)">
+      <span class="r-flow" aria-hidden="true"></span>
+      <svg class="r-doc" viewBox="0 0 16 20" aria-hidden="true"><path class="r-page" d="M2.5 1h7.5l4.5 4.5V18a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/><path class="r-lines" d="M10 1v4.5h4.5M4.5 10h7M4.5 13h7M4.5 16h4"/></svg>
+      <span class="r-text">resume<span>.pdf</span></span>
+    </a>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">Splunk · Cribl · SIEM</p>
+      <h1>Jigar Hirani</h1>
+      <p class="lead">I build the path between raw logs and the SIEM: collect it, shape it, cut what nobody searches, and keep every field the security team needs.</p>
+      <p class="now"><span class="live" aria-hidden="true"></span>Now at Rojo Integrations, building end-to-end observability for an AI-enabled integration platform.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:hirani.jigar117@gmail.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/jigarhirani">LinkedIn</a>
+      </div>
+
+      <figure class="flow" aria-label="Over 10 TB a day from Windows, EDR, firewall, AWS and application sources passes through Cribl and Ingest Processor, which remove 3 TB a day before it reaches Splunk Enterprise Security.">
+        <div class="node" aria-hidden="true">
+          <span class="n-label">Sources</span>
+          <ul class="chips">
+            <li>Windows events</li><li>EDR · XDR</li><li>Firewall</li><li>FortiGate</li><li>AWS</li><li>Apps</li>
+          </ul>
+        </div>
+        <div class="pipe in" aria-hidden="true"><span>10 TB+ / day</span></div>
+        <div class="node mid" aria-hidden="true">
+          <span class="n-label">Pipeline</span>
+          <strong>Cribl · Ingest Processor · Edge Processor</strong>
+          <ul class="ops"><li>filter</li><li>reshape</li><li>route</li><li>extract</li></ul>
+        </div>
+        <div class="pipe out" aria-hidden="true"><span>−3 TB / day</span></div>
+        <div class="node" aria-hidden="true">
+          <span class="n-label">SIEM</span>
+          <strong>Splunk Enterprise Security</strong>
+          <ul class="chips"><li>Detections</li><li>50+ alerts</li><li>20+ dashboards</li><li>Slack</li><li>ServiceNow</li></ul>
+        </div>
+      </figure>
+    </section>
+
+    <section id="work" class="block">
+      <h2>Stage by stage</h2>
+      <ol class="stages">
+        <li>
+          <span class="num">01</span>
+          <h3>Collect</h3>
+          <p class="metric"><b>~10k</b> forwarders at 99.9% SLA</p>
+          <p>Onboarded AWS (Splunk Add-on for AWS, plus Lambda, SQS and CloudWatch for custom sources), XDR, EDR, firewall and FortiGate data, with regex routing and filtering on the way in.</p>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <h3>Shape</h3>
+          <p class="metric"><b>−3 TB</b> a day, no field lost</p>
+          <p>Windows Event Logs from ~1 TB to ~550 GB a day. Trend Micro EDR rewritten as compact CSV for 60–70% less storage. Edge Processor on-prem, and Cribl routes and packs to Splunk, S3 and Elasticsearch.</p>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <h3>Detect</h3>
+          <p class="metric"><b>50+</b> alerts, 20+ dashboards</p>
+          <p>Enterprise Security use cases for brute-force attempts and hosts that stop reporting, built with the security team, with alerts routed to Slack and ServiceNow.</p>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <h3>Extend</h3>
+          <p class="metric"><b>2</b> add-ons on Splunkbase</p>
+          <p><a href="https://splunkbase.splunk.com/app/7816">DigiCert One Add-on</a> brings in certificate audit logs. <a href="https://splunkbase.splunk.com/app/7689">Get Diag</a> pulls diag files from forwarders through the deployment server. Plus custom search commands in Python.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="experience" class="block">
+      <h2>Experience</h2>
+      <ol class="jobs">
+        <li>
+          <time>May 2026 – now</time>
+          <div>
+            <h3>Splunk &amp; Observability Engineer · <span>Rojo Integrations</span></h3>
+            <p>End-to-end observability for an AI-enabled integration platform: metrics, logs and traces with Prometheus, Grafana, Loki and Tempo, plus Splunk and Datadog monitoring for procure-to-pay integration flows.</p>
+          </div>
+        </li>
+        <li>
+          <time>Aug 2024 – Apr 2026</time>
+          <div>
+            <h3>Splunk Admin · <span>Data Elicit Solutions, for Regeneron Pharmaceuticals</span></h3>
+            <p>Ran standalone, distributed and clustered Splunk at 10 TB+ a day. Every stage above, in production.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="toolbox" aria-label="Toolbox">
+        <div><h3>SIEM</h3><ul class="chips"><li>Splunk Enterprise &amp; Cloud</li><li>Enterprise Security</li><li>SPL</li></ul></div>
+        <div><h3>Pipelines</h3><ul class="chips"><li>Cribl Stream</li><li>Ingest Processor</li><li>Edge Processor</li></ul></div>
+        <div><h3>Observability</h3><ul class="chips"><li>Prometheus</li><li>Grafana</li><li>Loki</li><li>Tempo</li><li>Datadog</li></ul></div>
+        <div><h3>Code &amp; cloud</h3><ul class="chips"><li>Python</li><li>Regex</li><li>Shell</li><li>HTML &amp; CSS</li><li>AWS</li></ul></div>
+      </div>
+    </section>
+
+    <section id="certifications" class="block">
+      <h2>Certifications</h2>
+      <ul class="badges">
+        <li class="badge earned">
+          <a class="medal" href="https://www.credly.com/badges/d6562548-bc90-40b2-8948-c90bdcd00a18/public_url" target="_blank" rel="noopener">
+            <img src="/assets/badges/splunk-core-certified-user.png" width="120" height="120" alt="Splunk Core Certified User badge, verify on Credly">
+          </a>
+          <b>Splunk Core Certified User</b>
+          <a class="when" href="https://www.credly.com/badges/d6562548-bc90-40b2-8948-c90bdcd00a18/public_url" target="_blank" rel="noopener">Earned Oct 2026 · Verify ↗</a>
+        </li>
+        <li class="badge">
+          <div class="medal" aria-hidden="true"><span class="m-issuer">Splunk</span><span class="m-name">Power<br>User</span></div>
+          <b>Splunk Core Certified Power User</b>
+          <span class="when">In progress · Nov 2026</span>
+        </li>
+        <li class="badge">
+          <div class="medal" aria-hidden="true"><span class="m-issuer">Splunk</span><span class="m-name">Enterprise<br>Admin</span></div>
+          <b>Splunk Enterprise Certified Admin</b>
+          <span class="when">In progress · Nov 2026</span>
+        </li>
+        <li class="badge">
+          <div class="medal" aria-hidden="true"><span class="m-issuer">Cribl</span><span class="m-name">Stream<br>Admin</span></div>
+          <b>Cribl Certified Admin – Stream</b>
+          <span class="when">In progress</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="writing" class="block">
+      <h2>Writing</h2>
+      <a class="post" href="/blog/starting-this-blog/">
+        <time>29 Oct 2026</time>
+        <span><b>Starting this blog</b>What I'll write about, plus a search that shows where your Splunk license is going.</span>
+        <i aria-hidden="true">→</i>
+      </a>
+    </section>
+
+    <section id="contact" class="contact">
+      <p>Working on Splunk, SIEM or Cribl? Email is the fastest way to reach me.</p>
+      <a class="email" href="mailto:hirani.jigar117@gmail.com">hirani.jigar117@gmail.com</a>
+      <p class="links"><a href="https://www.linkedin.com/in/jigarhirani">LinkedIn</a><a href="https://github.com/jigarhirani">GitHub</a><a href="/assets/Jigar-Hirani-Resume.pdf" target="_blank" rel="noopener">Resume</a></p>
+    </section>
+  </main>
+
+  <footer class="foot">© 2026 Jigar Hirani · B.E. Computer Science, Darshan University</footer>
+</body>
+</html>
