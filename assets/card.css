@@ -42,8 +42,6 @@ main.shell { max-width: 1000px; padding: 72px 24px 32px; }
 .link.primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--text)); }
 .link.primary .ic { background: color-mix(in srgb, var(--on-accent) 16%, transparent); color: var(--on-accent); }
 .link.primary small, .link.primary .go { color: color-mix(in srgb, var(--on-accent) 80%, transparent); }
-.more { align-self: flex-start; margin-top: 8px; font-size: 14px; font-weight: 550; text-decoration: none; }
-.more:hover { text-decoration: underline; }
 
 /* Certifications: earned ones are the real Credly badge, the rest a dashed placeholder of the same size */
 .certs-block { padding-top: 36px; border-top: 1px solid var(--line); }

@@ -16,11 +16,13 @@ points at GitHub Pages (four A records, `www` CNAME).
 | `assets/site.css` | All styles. Colours are tokens on `:root`, with a dark set under `prefers-color-scheme` |
 | `assets/Jigar-Hirani-Resume.pdf` | Public resume with the phone number removed |
 | `robots.txt`, `sitemap.xml` | Crawl rules and the list of pages to index. Add every new blog post to the sitemap |
-| `assets/og.png`, `assets/apple-touch-icon.png` | Social share image (1200×630) and iOS icon, rendered from HTML with headless Chrome |
+| `assets/favicon.svg` | Site icon: a white J with a green dot, chosen 2026-10-29 |
+| `assets/og.png`, `apple-touch-icon.png`, `favicon.ico` | Share image (1200×630), iOS icon (180px) and fallback icon (32px PNG inside an ICO). Generated: run `node tools/render-images.mjs` after changing `tools/og.html` or `assets/favicon.svg` |
 | `404.html` | GitHub Pages not-found page |
 | `CNAME` | Custom domain |
 | `_config.yml` | Keeps `README.md`, `CLAUDE.md` and `tools/` off the live site |
 | `tools/strip-phone.mjs` | Removes the phone number from a resume PDF using Scrub's core in `../vibe/pdf-text-remover` |
+| `tools/render-images.mjs`, `tools/og.html` | Redraw the share image and icons with headless Chrome (puppeteer-core from `../vibe/pdf-text-remover`) |
 
 ## Common changes
 
@@ -29,13 +31,16 @@ points at GitHub Pages (four A records, `www` CNAME).
   SPL in a `<pre><code>` block: wrap commands and keywords in `<span class="k">`.
 - **Certification passed:** earned badges are the real Credly images. The user's
   public profile is `https://www.credly.com/users/jigarhirani/badges.json`; take the
-  new badge's `image_url` and `id` from it. Save the image at 240 px
-  (`sips -Z 240`) in `assets/badges/`, then copy the earned `<li>` in `portfolio/index.html` (and the `.certs` `<li>` on the card in `index.html`):
-  class `earned`, `<a class="medal">` wrapping the `<img>`, and both links to
-  `https://www.credly.com/badges/<id>/public_url`. In-progress certs are a dashed
-  `div.medal` placeholder; never show an official badge image for a cert not yet earned.
+  new badge's `image_url` and `id` from it. Save the image at 360 px
+  (`sips -Z 360`) in `assets/badges/`, then update both pages, which use different
+  markup. Card (`index.html`): `<li class="earned">` with `<a class="c-img">` around
+  the `<img>` and `<a class="c-when">`; in-progress certs are `<span class="c-img">`.
+  Portfolio (`portfolio/index.html`): `<li class="badge earned">` with
+  `<a class="medal">` around the `<img>`; in-progress certs are `<div class="medal">`.
+  Both links go to `https://www.credly.com/badges/<id>/public_url`. Never show an
+  official badge image for a cert not yet earned.
 - **New resume:** `node tools/strip-phone.mjs "<source.pdf>" assets/Jigar-Hirani-Resume.pdf`.
-  It refuses to write if the phone number is still there or the email was lost.
+  It refuses to write if a phone number is left on any page or the email was lost.
 
 ## Content rules
 
@@ -65,7 +70,7 @@ drop the "fancy" effects (log-stream background, glows, sweeps) on 2026-10-29.
 
 Green, chosen 2026-10-29 over indigo and amber: it reads as Splunk and as
 "healthy" in monitoring. Tokens are the two `:root` blocks at the top of
-`site.css`; the favicon uses the dark-mode green.
+`site.css`; the favicon's dot uses the dark-mode green.
 
 ## Pending
 
