@@ -9,7 +9,7 @@ points at GitHub Pages (four A records, `www` CNAME).
 
 | Path | What it is |
 |---|---|
-| `index.html` | The home page: a profile card (bio, connect links, Credly badges, toolbox) over a scrolling log-stream background. Styles in `assets/card.css` on top of `site.css` |
+| `index.html` | The home page: a profile card (bio, connect links, toolbox, Credly badges). Styles in `assets/card.css` on top of `site.css` |
 | `portfolio/index.html` | The full site: hero with the pipeline diagram, stages, experience and toolbox, certification badges, writing, contact. Linked from the card's "Full portfolio" |
 | `blog/index.html` | Post list |
 | `blog/<slug>/index.html` | One post, hand-written HTML |
@@ -43,6 +43,12 @@ points at GitHub Pages (four A records, `www` CNAME).
   hero's "Now" line names no tools; tools go in Experience and the toolbox.
 - No side projects from `vibe/` on the site for now.
 - Keep it short. Every section has to earn its place.
+
+## Look
+
+Professional and quiet: Inter (self-hosted, `assets/fonts/`) for everything, system
+monospace only in blog code blocks, no decorative animation. The user asked to
+drop the "fancy" effects (log-stream background, glows, sweeps) on 2026-10-29.
 
 ## Palette
 

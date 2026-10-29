@@ -1,121 +1,80 @@
 /* Profile card page. Fonts, colour tokens and .chips come from site.css. */
 
-.card-page { min-height: 100vh; overflow-x: hidden; }
+.card-page { min-height: 100vh; }
 
-/* Background: a slow stream of log events, faded at the edges, plus a green glow */
-.stream {
-  position: fixed; inset: 0; overflow: hidden; pointer-events: none;
-  display: flex; justify-content: space-between; align-items: flex-start;
-  -webkit-mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent);
-          mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent);
-}
-.stream pre { margin: 0; padding: 0 24px; font: 12px/2.1 var(--mono); color: var(--muted); opacity: .28; white-space: pre; }
-.stream pre.on { animation: stream 90s linear infinite; }
-.stream pre + pre { flex: none; animation-delay: -37s; }
-.stream i { font-style: normal; color: var(--accent); }
-@keyframes stream { to { transform: translateY(-50%); } }
-.card-page::before {
-  content: ""; position: fixed; z-index: -1; left: 50%; top: 40%; width: 900px; height: 700px;
-  transform: translate(-50%, -50%); pointer-events: none;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent);
-  animation: breathe 8s ease-in-out infinite alternate;
-}
-@keyframes breathe { to { opacity: .55; transform: translate(-50%, -48%) scale(1.08); } }
-
-/* Card */
-main.shell { position: relative; max-width: 1000px; padding: 64px 24px 32px; }
+main.shell { max-width: 1000px; padding: 72px 24px 32px; }
 .card {
-  position: relative; display: grid; gap: 36px 48px; padding: 44px 40px 40px;
-  grid-template-columns: 1fr 360px; grid-template-areas: "who connect" "tools connect" "certs certs";
-  background: color-mix(in srgb, var(--panel) 80%, transparent);
-  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-  border: 1px solid var(--line); border-radius: 28px;
-  box-shadow: 0 30px 80px -40px rgb(0 0 0 / .5);
+  display: grid; gap: 40px 56px; padding: 48px 44px 44px;
+  grid-template-columns: 1fr 340px; grid-template-areas: "who connect" "tools connect" "certs certs";
+  background: var(--panel); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow);
 }
-.card::before {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-  background: radial-gradient(480px circle at var(--x, 30%) var(--y, 0%), color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%);
-}
-.card > section { position: relative; animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
 .who { grid-area: who; }
-.connect { grid-area: connect; animation-delay: .12s !important; }
-.tools { grid-area: tools; animation-delay: .2s !important; }
-.certs-block { grid-area: certs; animation-delay: .28s !important; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
-
+.connect { grid-area: connect; }
+.tools { grid-area: tools; }
+.certs-block { grid-area: certs; }
 .card h2 { margin: 0 0 14px; }
 
 /* Who */
-.card h1 { font-size: clamp(40px, 6vw, 60px); line-height: .98; margin: 10px 0 0; }
-.bio { margin-top: 20px; color: var(--muted); max-width: 52ch; }
-.kpis { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.kpis li { padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
-.kpis b { display: block; font-size: 24px; font-weight: 700; font-stretch: 108%; letter-spacing: -.02em; line-height: 1.15; }
-.kpis span { display: block; font-size: 12px; line-height: 1.35; color: var(--muted); }
+.card h1 { font-size: clamp(38px, 5.6vw, 56px); line-height: 1.02; letter-spacing: -.04em; margin: 10px 0 0; }
+.bio { margin-top: 20px; font-size: 17px; color: var(--muted); max-width: 50ch; }
+.kpis { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 12px; }
+.kpis li { padding: 14px 16px; }
+.kpis li + li { border-left: 1px solid var(--line); }
+.kpis b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -.025em; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.kpis span { display: block; font-size: 13px; line-height: 1.35; color: var(--muted); }
 
 /* Connect */
-.connect { display: flex; flex-direction: column; gap: 10px; }
+.connect { display: flex; flex-direction: column; gap: 8px; }
 .link {
-  position: relative; overflow: hidden; display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 14px;
-  padding: 11px 18px 11px 11px; border: 1px solid var(--line); border-radius: 16px;
-  background: var(--panel); color: var(--text); text-decoration: none;
-  transition: border-color .2s, transform .2s;
+  display: grid; grid-template-columns: 36px 1fr auto; align-items: center; gap: 14px;
+  padding: 10px 16px 10px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--panel); color: var(--text); text-decoration: none; transition: border-color .15s, background .15s;
 }
-.link::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateX(-110%);
-  background: linear-gradient(100deg, transparent 25%, color-mix(in srgb, var(--accent) 16%, transparent) 50%, transparent 75%);
-}
-.link:hover { border-color: var(--accent); transform: translateY(-1px); }
-.link:hover::after { transform: translateX(110%); transition: transform .8s ease; }
-.ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
-.ic svg { width: 20px; height: 20px; fill: currentColor; }
+.link:hover { border-color: var(--accent); }
+.ic { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); }
+.ic svg { width: 18px; height: 18px; fill: currentColor; }
 .ic svg.stroke { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .link b { display: block; font-size: 15px; font-weight: 600; line-height: 1.3; }
-.link small { display: block; font: 12px var(--mono); color: var(--muted); overflow-wrap: anywhere; }
-.go { color: var(--muted); transition: transform .2s, color .2s; }
-.link:hover .go { transform: translateX(4px); color: var(--accent); }
+.link small { display: block; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.go { color: var(--muted); transition: color .15s; }
+.link:hover .go { color: var(--accent); }
 .link.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.link.primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--text)); }
 .link.primary .ic { background: color-mix(in srgb, var(--on-accent) 16%, transparent); color: var(--on-accent); }
-.link.primary small, .link.primary .go { color: color-mix(in srgb, var(--on-accent) 75%, transparent); }
-.link.primary::after { background: linear-gradient(100deg, transparent 25%, rgb(255 255 255 / .25) 50%, transparent 75%); }
-.more { align-self: flex-start; margin-top: 6px; font-size: 14px; text-decoration: none; }
+.link.primary small, .link.primary .go { color: color-mix(in srgb, var(--on-accent) 80%, transparent); }
+.more { align-self: flex-start; margin-top: 8px; font-size: 14px; font-weight: 550; text-decoration: none; }
 .more:hover { text-decoration: underline; }
 
 /* Certifications: earned ones are the real Credly badge, the rest a dashed placeholder of the same size */
-.certs-block { padding-top: 32px; border-top: 1px solid var(--line); }
+.certs-block { padding-top: 36px; border-top: 1px solid var(--line); }
 .certs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .certs li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; }
 .c-img {
-  width: 100%; max-width: 160px; aspect-ratio: 1; margin-bottom: 12px; border-radius: 12px;
+  width: 100%; max-width: 160px; aspect-ratio: 1; margin-bottom: 12px; border-radius: 10px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  border: 2px dashed var(--line); font: 12px var(--mono); color: var(--muted);
+  border: 1.5px dashed var(--line); font-size: 13px; color: var(--muted);
 }
-.c-img i { font: normal 600 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 6px; color: var(--text); }
+.c-img i { font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; color: var(--text); }
 .earned .c-img { border: 0; }
-.certs img { display: block; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 14px 30px -14px rgb(0 0 0 / .55); transition: transform .3s; }
-.certs a:hover img { transform: rotate(-3deg) scale(1.04); }
-.certs b { font-size: 14px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
-.c-when { font: 12px var(--mono); color: var(--muted); text-decoration: none; }
-.earned .c-when { color: var(--accent); }
+.certs img { display: block; width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow); }
+.certs b { font-size: 14px; font-weight: 600; line-height: 1.35; text-wrap: balance; }
+.c-when { font-size: 13px; color: var(--muted); text-decoration: none; }
+.earned .c-when { color: var(--accent); font-weight: 550; }
 a.c-when:hover { text-decoration: underline; }
 
-.mini { text-align: center; margin-top: 24px; font: 12px var(--mono); color: var(--muted); }
+.mini { text-align: center; margin-top: 24px; font-size: 13px; color: var(--muted); }
 
 /* Tablet */
 @media (max-width: 900px) {
-  .card { grid-template-columns: 1fr; grid-template-areas: "who" "connect" "certs" "tools"; padding: 36px 32px; }
+  .card { grid-template-columns: 1fr; grid-template-areas: "who" "connect" "certs" "tools"; padding: 40px 32px; }
   .certs-block { padding-top: 0; border-top: 0; }
 }
 /* Phone */
 @media (max-width: 560px) {
-  main.shell { padding: 20px 12px 24px; }
-  .card { padding: 28px 18px 24px; border-radius: 22px; gap: 32px; }
-  .kpis { gap: 6px; }
-  .kpis li { padding: 10px; }
-  .kpis b { font-size: 20px; }
+  main.shell { padding: 16px 12px 24px; }
+  .card { padding: 28px 18px 24px; border-radius: 16px; gap: 36px; }
+  .kpis li { padding: 12px 10px; }
+  .kpis b { font-size: 19px; }
+  .kpis span { font-size: 12px; }
   .certs { grid-template-columns: 1fr 1fr; gap: 24px 14px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .stream pre.on, .card-page::before, .card > section { animation: none; }
-  .link:hover::after { transition: none; }
 }

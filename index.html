@@ -12,30 +12,11 @@
   <meta property="og:url" content="https://jigarhirani.tech/">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="/assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/card.css">
 </head>
 <body class="card-page">
-  <div class="stream" aria-hidden="true"><pre>
-18:42:07.113  idx-cluster-01   sourcetype=WinEventLog:Security  EventCode=4624  action=<i>success</i>
-18:42:07.208  ingest-proc      pipeline=win_reduce  in=1.00TB  out=550GB  fields_kept=<i>100%</i>
-18:42:07.344  cribl-worker-2   route=edr_to_splunk  format=csv  saved=<i>67%</i>
-18:42:07.512  es-notable       rule="Brute Force Access"  src=10.20.4.17  urgency=<i>high</i>
-18:42:07.690  deployment-srv   forwarders_connected=9987  sla=<i>99.9%</i>
-18:42:07.950  prometheus       job=adapter  up=1  p95_latency=212ms
-18:42:08.104  loki             {app="p2p-flow"} |= "error"  count=<i>0</i>
-18:42:08.233  tempo            trace=4bf92f3577b34da6  spans=38  duration=1.2s
-18:42:08.377  alert            name="Host not reporting"  host=fw-edge-03  sent_to=<i>ServiceNow</i>
-18:42:08.512  slack            channel=#siem-alerts  delivered=<i>true</i>
-18:42:08.640  hf-02            sourcetype=fortigate_traffic  routed=index:firewall
-18:42:08.781  aws-lambda       s3://audit-logs -&gt; hec  events=12408  status=<i>ok</i>
-18:42:08.902  search-head      | tstats count where index=* by sourcetype  took=0.84s
-18:42:09.015  ta-digicert-one  input=audit_logs  fetched=214  checkpoint=<i>saved</i>
-18:42:09.170  grafana          dashboard="P2P flow health"  panels=12  state=<i>healthy</i>
-18:42:09.322  edge-proc-01     node=onprem-a  pipeline=fw_normalize  dropped_fields=<i>0</i>
-</pre></div>
-
   <main id="main" class="shell">
     <article class="card">
       <section class="who">
@@ -45,7 +26,7 @@
         <ul class="kpis">
           <li><b>10 TB+</b><span>ingest a day</span></li>
           <li><b>−3 TB</b><span>cut a day</span></li>
-          <li><b>2</b><span>Splunkbase add-ons</span></li>
+          <li><b>2</b><span>Splunkbase add‑ons</span></li>
         </ul>
       </section>
 
@@ -119,19 +100,5 @@
 
     <p class="mini">jigarhirani.tech · © 2026</p>
   </main>
-
-  <script>
-    // Loop the background log stream (two offset columns), and let the card's glow follow the pointer.
-    const pre = document.querySelector('.stream pre');
-    pre.innerHTML = pre.innerHTML.repeat(6);
-    pre.classList.add('on');
-    pre.after(pre.cloneNode(true));
-    const card = document.querySelector('.card');
-    card.addEventListener('pointermove', (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--x', `${e.clientX - r.left}px`);
-      card.style.setProperty('--y', `${e.clientY - r.top}px`);
-    });
-  </script>
 </body>
 </html>
