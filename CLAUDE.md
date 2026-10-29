@@ -24,8 +24,13 @@ points at GitHub Pages (four A records, `www` CNAME).
 - **New post:** copy `blog/starting-this-blog/` to `blog/<slug>/`, edit it, then add a
   `.post` card to `blog/index.html` and to the Writing section of `index.html`.
   SPL in a `<pre><code>` block: wrap commands and keywords in `<span class="k">`.
-- **Certification passed:** add `earned` to the badge's `<li>`, add
-  `<span class="m-check">✓</span>` inside `.medal`, and change the `.when` text.
+- **Certification passed:** earned badges are the real Credly images. The user's
+  public profile is `https://www.credly.com/users/jigarhirani/badges.json`; take the
+  new badge's `image_url` and `id` from it. Save the image at 240 px
+  (`sips -Z 240`) in `assets/badges/`, then copy the earned `<li>` in `index.html`:
+  class `earned`, `<a class="medal">` wrapping the `<img>`, and both links to
+  `https://www.credly.com/badges/<id>/public_url`. In-progress certs are a dashed
+  `div.medal` placeholder; never show an official badge image for a cert not yet earned.
 - **New resume:** `node tools/strip-phone.mjs "<source.pdf>" assets/Jigar-Hirani-Resume.pdf`.
   It refuses to write if the phone number is still there or the email was lost.
 
@@ -49,8 +54,6 @@ Green, chosen 2026-10-29 over indigo and amber: it reads as Splunk and as
 - Content rewrite from the user: the site is too focused on ingest pipelines;
   it should cover the whole job (platform admin, onboarding, detections,
   dashboards, add-ons, observability).
-- Replace the earned certification badge with the real Credly badge image,
-  linked to its Credly page. In-progress certs keep the drawn outline badge.
 - Confirm the Cribl exam name (currently "Cribl Certified Admin – Stream").
 
 ## Check before shipping
