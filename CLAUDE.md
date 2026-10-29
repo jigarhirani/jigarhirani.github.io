@@ -10,11 +10,13 @@ points at GitHub Pages (four A records, `www` CNAME).
 | Path | What it is |
 |---|---|
 | `index.html` | The home page: a profile card (bio, connect links, toolbox, Credly badges). Styles in `assets/card.css` on top of `site.css` |
-| `portfolio/index.html` | The full site: hero with the pipeline diagram, stages, experience and toolbox, certification badges, writing, contact. Linked from the card's "Full portfolio" |
+| `portfolio/index.html` | The full site: hero with the pipeline diagram, stages, experience and toolbox, certification badges, writing, contact. Not linked from anywhere and `noindex`: the user opens it by URL until the content is final |
 | `blog/index.html` | Post list |
 | `blog/<slug>/index.html` | One post, hand-written HTML |
 | `assets/site.css` | All styles. Colours are tokens on `:root`, with a dark set under `prefers-color-scheme` |
 | `assets/Jigar-Hirani-Resume.pdf` | Public resume with the phone number removed |
+| `robots.txt`, `sitemap.xml` | Crawl rules and the list of pages to index. Add every new blog post to the sitemap |
+| `assets/og.png`, `assets/apple-touch-icon.png` | Social share image (1200×630) and iOS icon, rendered from HTML with headless Chrome |
 | `404.html` | GitHub Pages not-found page |
 | `CNAME` | Custom domain |
 | `_config.yml` | Keeps `README.md`, `CLAUDE.md` and `tools/` off the live site |
@@ -43,6 +45,15 @@ points at GitHub Pages (four A records, `www` CNAME).
   hero's "Now" line names no tools; tools go in Experience and the toolbox.
 - No side projects from `vibe/` on the site for now.
 - Keep it short. Every section has to earn its place.
+
+## SEO
+
+Goal: the site shows up when people search "Jigar Hirani". The home page has a
+Person + ProfilePage + WebSite JSON-LD graph whose `sameAs` ties the site to
+LinkedIn, GitHub and Credly; each post has BlogPosting JSON-LD with the same
+author `@id`. Every page needs a unique title, description and canonical URL.
+The user has to verify the site in Google Search Console and submit the sitemap;
+that cannot be done from here.
 
 ## Look
 
