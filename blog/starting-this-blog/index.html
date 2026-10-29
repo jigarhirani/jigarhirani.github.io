@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starting this blog · Jigar Hirani</title>
+  <meta name="description" content="What I'll write about, plus a search that shows where your Splunk license is going.">
+  <link rel="canonical" href="https://jigarhirani.tech/blog/starting-this-blog/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Starting this blog">
+  <meta property="og:description" content="What I'll write about, plus a search that shows where your Splunk license is going.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <a class="mark" href="/">jigar<span>/</span>hirani</a>
+    <nav aria-label="Sections">
+      <a href="/#work">Work</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#certifications">Certs</a>
+      <a href="/blog/">Writing</a>
+    </nav>
+    <a class="resume" href="/assets/Jigar-Hirani-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume (PDF, opens in a new tab)">
+      <span class="r-flow" aria-hidden="true"></span>
+      <svg class="r-doc" viewBox="0 0 16 20" aria-hidden="true"><path class="r-page" d="M2.5 1h7.5l4.5 4.5V18a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/><path class="r-lines" d="M10 1v4.5h4.5M4.5 10h7M4.5 13h7M4.5 16h4"/></svg>
+      <span class="r-text">resume<span>.pdf</span></span>
+    </a>
+  </header>
+
+  <main id="main" class="article">
+    <a class="back" href="/blog/">← All posts</a>
+    <p class="eyebrow"><time datetime="2026-10-29">29 Oct 2026</time></p>
+    <h1>Starting this blog</h1>
+
+    <div class="prose">
+      <p>For the last two years I've worked on Splunk every day: onboarding data, fixing parsing, building dashboards and alerts, and more and more, shrinking what goes into the indexes without losing anything people search for.</p>
+      <p>Most of what I learn ends up in private notes. From now on, it goes here.</p>
+
+      <h2>What I'll write about</h2>
+      <ul>
+        <li>Cutting ingest with Ingest Processor and Edge Processor, and checking that nothing was lost</li>
+        <li>Onboarding awkward data sources such as EDR, XDR, firewall and AWS logs</li>
+        <li>Building Splunk add-ons and custom search commands in Python</li>
+        <li>Observability with Splunk and Datadog</li>
+        <li>What I learn while studying for the Splunk Power User and Admin certifications</li>
+      </ul>
+
+      <h2>A search to start with</h2>
+      <p>When someone asks where the license is going, this is a good first look. It adds up the last seven days of indexed data by sourcetype, using the license usage log:</p>
+<pre><code>index=_internal source=*license_usage.log* type=Usage earliest=-7d@d
+| <span class="k">stats</span> sum(b) <span class="k">AS</span> bytes <span class="k">BY</span> st
+| <span class="k">eval</span> GB = round(bytes / 1024 / 1024 / 1024, 2)
+| <span class="k">sort</span> - GB
+| <span class="k">rename</span> st <span class="k">AS</span> sourcetype
+| <span class="k">fields</span> sourcetype GB</code></pre>
+      <p>Run it on the license manager, or on a search head that can search the license manager's <code>_internal</code> index. The sourcetypes at the top of the list are usually where an ingest pipeline will save the most.</p>
+    </div>
+  </main>
+
+  <footer class="foot">© 2026 Jigar Hirani</footer>
+</body>
+</html>
