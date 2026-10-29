@@ -16,7 +16,7 @@ points at GitHub Pages (four A records, `www` CNAME).
 | `assets/site.css` | All styles. Colours are tokens on `:root`, with a dark set under `prefers-color-scheme` |
 | `assets/Jigar-Hirani-Resume.pdf` | Public resume with the phone number removed |
 | `robots.txt`, `sitemap.xml` | Crawl rules and the list of pages to index. Add every new blog post to the sitemap |
-| `assets/favicon.svg` | Site icon: a white J with a green dot, chosen 2026-10-29 |
+| `assets/favicon.svg` | Site icon: a bold white J with a green dot on a dark tile, sized to fill the tile (option 1 of the refinements, 2026-10-29) |
 | `assets/og.png`, `apple-touch-icon.png`, `favicon.ico` | Share image (1200×630), iOS icon (180px) and fallback icon (32px PNG inside an ICO). Generated: run `node tools/render-images.mjs` after changing `tools/og.html` or `assets/favicon.svg` |
 | `404.html` | GitHub Pages not-found page |
 | `CNAME` | Custom domain |
