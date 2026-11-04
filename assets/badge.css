@@ -48,7 +48,7 @@ ul, ol { list-style: none; padding: 0; }
 .b-foot .b-label { margin: 0 0 2px; }
 .b-foot b { font-size: 15px; font-weight: 600; }
 .b-foot small { display: block; margin-top: 2px; font-size: 12px; color: #59625C; }
-.qr { display: block; flex: none; }
+.qr { display: block; flex: none; align-self: flex-end; }
 .qr svg { display: block; width: 84px; height: 84px; }
 /* The scan hint sits at the bottom of the left column, level with the QR's bottom edge, so it adds no height */
 .b-exp { display: flex; flex-direction: column; }
