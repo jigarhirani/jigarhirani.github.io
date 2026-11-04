@@ -22,7 +22,7 @@ ul, ol { list-style: none; padding: 0; }
 /* The badge is a physical white card in both themes, so its colours are fixed */
 .stage { position: sticky; top: 0; height: 100vh; min-height: 740px; display: flex; flex-direction: column; align-items: center; }
 .strap { width: 30px; height: 120px; background: var(--strap); overflow: hidden; display: flex; justify-content: center; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .08); }
-.strap span { writing-mode: vertical-rl; font: 500 9px var(--mono); letter-spacing: .22em; color: rgb(255 255 255 / .85); white-space: nowrap; padding-top: 6px; }
+.strap span { writing-mode: vertical-rl; font: 500 9px var(--mono); letter-spacing: .22em; color: #FFFFFF; white-space: nowrap; padding-top: 6px; }
 .clip { width: 46px; height: 26px; margin-top: -2px; border-radius: 6px 6px 10px 10px; background: linear-gradient(#C9CFCB, #8E9792); box-shadow: 0 2px 4px rgb(0 0 0 / .25); position: relative; z-index: 2; }
 .clip::after { content: ""; position: absolute; left: 50%; bottom: -14px; width: 10px; height: 18px; transform: translateX(-50%); border-radius: 0 0 6px 6px; background: linear-gradient(#B5BCB8, #7F8883); }
 .badge {
