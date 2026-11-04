@@ -9,8 +9,8 @@ const b = await p.launch({ executablePath: '/Applications/Google Chrome.app/Cont
 const pg = await b.newPage();
 const errs = []; pg.on('pageerror', (e) => errs.push(e.message));
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-let fails = 0;
-const ok = (c, m) => { if (!c) fails++; console.log((c ? 'pass' : 'FAIL') + ': ' + m); };
+const failed = [];
+const ok = (c, m) => { if (!c) failed.push(m); console.log((c ? 'pass' : 'FAIL') + ': ' + m); };
 const go = async (w, dpr = 2, mobile = false) => { await pg.setViewport({ width: w, height: 900, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile }); await pg.goto(BASE + '/?t=' + Date.now(), { waitUntil: 'networkidle0' }); };
 const decode = async () => { const s = await (await pg.$('.qr svg')).screenshot({ encoding: 'base64' }); return pg.evaluate(async (x) => { const i = new Image(); i.src = 'data:image/png;base64,' + x; await i.decode(); return (await new BarcodeDetector({ formats: ['qr_code'] }).detect(i)).map((r) => r.rawValue); }, s); };
 
@@ -33,9 +33,15 @@ await pg.click('.focus li:nth-child(3)'); await wait(200);
 ok((await pg.$$('.hosts button')).length === 9, 'defend: Detections opens nine hosts');
 for (let i = 0; i < 3; i++) { await pg.click('.b-head svg'); await wait(80); }
 ok(!(await pg.$('.spl-in')), 'one at a time: J-logo taps are ignored while Defender is open');
-let hot = null; for (let i = 0; i < 20 && !hot; i++) { await wait(250); hot = await pg.$('.hosts button.hot'); }
-if (hot) await hot.click(); await wait(100);
-ok(await pg.$eval('.egg-blocked', (e) => e.textContent) === '1', 'defend: blocking an attacked host counts 1');
+// Attacks are random, so allow up to three rounds to catch one before it breaches.
+let blocked = '0';
+for (let round = 0; round < 3 && blocked === '0'; round++) {
+  let hot = null; for (let i = 0; i < 20 && !hot; i++) { await wait(250); hot = await pg.$('.hosts button.hot'); }
+  if (hot) await hot.click(); await wait(100);
+  blocked = await pg.$eval('.egg-blocked', (e) => e.textContent);
+  if (blocked === '0' && await pg.$('.egg-again')) await pg.click('.egg-again');
+}
+ok(blocked === '1', 'defend: blocking an attacked host counts 1');
 await pg.click('.egg-x'); await wait(200);
 ok(!!(await pg.$('.focus')), 'defend: x restores the badge');
 await wait(1200); // timers must be gone: no errors after closing
@@ -67,6 +73,6 @@ ok(layout === 0, 'layout: no overflow, QR square and inside the badge (7 widths 
 await pg.setViewport({ width: 1366, height: 768 }); await pg.goto(BASE + '/', { waitUntil: 'networkidle0' });
 ok(await pg.evaluate(() => document.querySelector('.badge').getBoundingClientRect().bottom <= innerHeight), 'badge fits a 1366x768 laptop screen without scrolling');
 ok(errs.length === 0, 'no JavaScript errors' + (errs.length ? ': ' + errs.join(' | ') : ''));
-console.log(fails ? fails + ' FAILED' : 'ALL PASS');
+console.log(failed.length ? `${failed.length} FAILED: ${failed.join(' | ')}` : 'ALL PASS');
 await b.close();
-process.exitCode = fails ? 1 : 0;
+process.exitCode = failed.length ? 1 : 0;
