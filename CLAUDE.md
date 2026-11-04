@@ -24,6 +24,8 @@ points at GitHub Pages (four A records, `www` CNAME).
 | `_config.yml` | Keeps `README.md`, `CLAUDE.md` and `tools/` off the live site |
 | `tools/strip-phone.mjs` | Removes the phone number from a resume PDF using Scrub's core in `../vibe/pdf-text-remover` |
 | `tools/render-images.mjs`, `tools/og.html` | Redraw the share image and icons with headless Chrome (puppeteer-core from `../vibe/pdf-text-remover`) |
+| `assets/eggs.js` | The three hidden badge games (see Easter eggs) |
+| `tools/test-home.mjs` | End-to-end check of the home page: QR contents, the games, layout at 7 widths in light and dark |
 
 ## Common changes
 
@@ -71,9 +73,26 @@ that cannot be done from here.
 Professional and quiet: IBM Plex Sans for everything, Plex Mono for labels and
 code, no decorative animation. The user asked to drop the "fancy" effects
 (log-stream background, glows, sweeps) on 2026-10-29, and picked the badge home
-page on 2026-11-04. The badge stays a white card in dark mode; its QR code is
-real (it opens https://jigarhirani.tech) and was generated once with Python
-`qrcode` into inline SVG path data.
+page on 2026-11-04. The badge stays a white card in dark mode.
+
+The badge QR holds a vCard 3.0 contact card (name, title, email, website), so
+the iPhone Camera and Android (Google Lens, Samsung and Pixel cameras) offer
+"Add to Contacts" straight from the scan; no file download, which Android
+handles badly. It is 49×49 modules (version 8, error correction L), drawn at
+96px, and was generated once with Python `qrcode` into inline SVG path data.
+Adding LinkedIn made it 57+ modules, too dense to scan from a screen.
+`tools/test-home.mjs` checks the QR still decodes to exactly that card.
+
+## Easter eggs
+
+`assets/eggs.js` hides three games in the badge (styles at the end of
+`badge.css`). The user wanted all three, on 2026-11-04:
+- click the QR → Snake (score = events indexed)
+- click "Detections" → Brute-force Defender (block attacks on nine hosts, 30 s)
+- press `/` or tap the J logo three times → a small SPL console
+
+Only one game can be open; Esc or × restores the badge from a saved copy of
+its HTML. Run `node tools/test-home.mjs` after touching the badge or the eggs.
 
 ## Palette
 
@@ -92,6 +111,7 @@ Green, chosen 2026-10-29 over indigo and amber: it reads as Splunk and as
 
 ```
 python3 -m http.server 8765    # then http://localhost:8765
+node tools/test-home.mjs       # home page checks; exits non-zero on failure
 ```
 
 Look at widths 360, 390, 768, 1024 and 1280, in light and dark. No horizontal

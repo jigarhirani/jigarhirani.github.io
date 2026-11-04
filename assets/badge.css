@@ -48,8 +48,9 @@ ul, ol { list-style: none; padding: 0; }
 .b-foot .b-label { margin: 0 0 2px; }
 .b-foot b { font-size: 15px; font-weight: 600; }
 .b-foot small { display: block; margin-top: 2px; font-size: 12px; color: #59625C; }
-.qr { display: block; width: 64px; height: 64px; flex: none; }
-.qr svg { display: block; width: 100%; height: 100%; }
+.qr { display: grid; justify-items: center; gap: 6px; flex: none; text-decoration: none; }
+.qr svg { display: block; width: 96px; height: 96px; }
+.qr span { font: 500 9px var(--mono); letter-spacing: .12em; color: #59625C; white-space: nowrap; }
 .band { background: #17803A; color: #fff; text-align: center; font: 600 14px var(--mono); letter-spacing: .3em; padding: 12px 0 12px .3em; }
 
 /* Details beside the badge */
@@ -103,6 +104,7 @@ footer { font-size: 13px; color: var(--muted); display: flex; justify-content: s
 }
 @media (max-width: 350px) {
   .focus { grid-template-columns: 1fr; }
+  .qr svg { width: 84px; height: 84px; }
 }
 @media (max-width: 560px) {
   .page { padding: 0 16px; }
@@ -117,3 +119,28 @@ footer { font-size: 13px; color: var(--muted); display: flex; justify-content: s
   .certs { gap: 24px 12px; }
   .certs b { font-size: 13px; }
 }
+
+/* Easter eggs (assets/eggs.js): hidden games that take over the badge body, e-ink style */
+.qr, .focus li:nth-child(3), .b-head svg { cursor: pointer; }
+.egg-bar { display: flex; justify-content: space-between; align-items: center; font: 500 11px var(--mono); letter-spacing: .1em; color: #59625C; margin-bottom: 10px; }
+.egg-bar b { color: #111513; font-weight: 500; }
+.egg-x { width: 28px; height: 28px; border: 1px solid #D9DED7; border-radius: 6px; background: #fff; color: #111513; font: 16px/1 var(--sans); cursor: pointer; }
+.egg-msg { margin-top: 10px; font: 12px/1.5 var(--mono); color: #59625C; min-height: 36px; }
+.egg-msg button { margin-left: 4px; border: 0; background: none; color: #17803A; font: inherit; text-decoration: underline; cursor: pointer; padding: 0; }
+.egg-canvas { display: block; width: 100%; border: 1.5px solid #111513; border-radius: 6px; touch-action: none; }
+.hosts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.hosts button { height: 70px; padding: 6px; border: 1.5px solid #D9DED7; border-radius: 8px; background: #fff; color: #111513; font: 500 12px var(--mono); display: grid; align-content: center; gap: 3px; cursor: pointer; text-align: center; }
+.hosts button small { font-size: 10px; color: #59625C; min-height: 13px; }
+.hosts button i { display: block; height: 4px; margin: 0 6px; border-radius: 2px; background: #E8EBE7; }
+.hosts button.hot { border-color: #D93036; }
+.hosts button.hot small { color: #D93036; }
+.hosts button.hot i { background: linear-gradient(90deg, #D93036 var(--p), #F2D4D5 var(--p)); }
+.hosts button.ok { border-color: #17803A; }
+.spl-out { height: 250px; overflow-y: auto; padding: 10px 12px; border: 1.5px solid #111513; border-bottom: 0; border-radius: 6px 6px 0 0; font: 12px/1.55 var(--mono); color: #111513; white-space: pre-wrap; overflow-wrap: anywhere; }
+.spl-out .q { color: #17803A; }
+.spl-out .err { color: #D93036; }
+.spl-out .dim { color: #59625C; }
+.spl-in { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1.5px solid #111513; border-radius: 0 0 6px 6px; font: 12px var(--mono); color: #17803A; }
+.spl-in input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font: 16px var(--mono); color: #111513; }
+.page-hint { font: 12px var(--mono); color: var(--muted); }
+@media (hover: none), (pointer: coarse) { .page-hint { display: none; } }
