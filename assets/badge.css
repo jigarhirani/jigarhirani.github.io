@@ -44,15 +44,14 @@ ul, ol { list-style: none; padding: 0; }
 .focus li { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid #E5E9E4; border-radius: 9px; font-size: 13.5px; font-weight: 500; }
 .focus svg { width: 16px; height: 16px; flex: none; fill: none; stroke: #17803A; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
-.b-foot { display: flex; align-items: stretch; justify-content: space-between; gap: 16px; margin-top: 16px; padding-top: 14px; border-top: 1px solid #E8EBE7; }
+.b-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; padding-top: 14px; border-top: 1px solid #E8EBE7; }
 .b-foot .b-label { margin: 0 0 2px; }
 .b-foot b { font-size: 15px; font-weight: 600; }
 .b-foot small { display: block; margin-top: 2px; font-size: 12px; color: #59625C; }
-.qr { display: block; flex: none; align-self: flex-end; }
+/* Like event badges: a small caption right under the code */
+.qr { display: grid; justify-items: center; gap: 5px; flex: none; text-decoration: none; }
 .qr svg { display: block; width: 84px; height: 84px; }
-/* The scan hint sits at the bottom of the left column, level with the QR's bottom edge, so it adds no height */
-.b-exp { display: flex; flex-direction: column; }
-.scan { margin-top: auto; padding-top: 8px; font: 500 10px/1 var(--mono); letter-spacing: .12em; color: #17803A; white-space: nowrap; }
+.qr span { font: 500 9px/1 var(--mono); letter-spacing: .14em; color: #59625C; white-space: nowrap; }
 .band { background: #17803A; color: #fff; text-align: center; font: 600 14px var(--mono); letter-spacing: .3em; padding: 12px 0 12px .3em; }
 
 /* Details beside the badge */
