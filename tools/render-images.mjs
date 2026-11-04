@@ -3,7 +3,8 @@
 // tools/og.html     -> assets/og.png (1200x630 share image)
 // assets/favicon.svg -> apple-touch-icon.png (180px, iOS), favicon-96x96.png and favicon.ico (16/32/48px PNGs in an ICO).
 // Google only shows favicons sized in multiples of 48px (or SVG), hence the 48 and 96.
-import { writeFileSync } from 'node:fs';
+// assets/badges/*.png -> *.webp at 296px for the home page, which shows them at up to 148px.
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 const { default: puppeteer } = await import(new URL('../../vibe/pdf-text-remover/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js', import.meta.url));
 
 const root = new URL('../', import.meta.url);
@@ -48,5 +49,26 @@ sizes.forEach((size, i) => {
 });
 writeFileSync(file('favicon.ico'), Buffer.concat([head, ...images]));
 
+// Credly badges: a 296px WebP (2x the 148px display size) is a fraction of the 360px PNG.
+// The PNG goes in as a data URL so the canvas is not treated as cross-origin.
+const webps = [];
+for (const name of readdirSync(file('assets/badges/')).filter((f) => f.endsWith('.png'))) {
+  const png = 'data:image/png;base64,' + readFileSync(file(`assets/badges/${name}`)).toString('base64');
+  const webp = await page.evaluate(async (src) => {
+    const img = new Image();
+    img.src = src;
+    await img.decode();
+    const c = document.createElement('canvas');
+    c.width = c.height = 296;
+    const ctx = c.getContext('2d');
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(img, 0, 0, 296, 296);
+    return c.toDataURL('image/webp', 0.92);
+  }, png);
+  if (!webp.startsWith('data:image/webp')) throw new Error('Chrome did not encode WebP for ' + name);
+  writeFileSync(file(`assets/badges/${name.replace(/\.png$/, '.webp')}`), Buffer.from(webp.split(',')[1], 'base64'));
+  webps.push(name.replace(/\.png$/, '.webp'));
+}
+
 await browser.close();
-console.log('wrote assets/og.png, apple-touch-icon.png, favicon-96x96.png, favicon.ico');
+console.log('wrote assets/og.png, apple-touch-icon.png, favicon-96x96.png, favicon.ico, badges: ' + webps.join(', '));

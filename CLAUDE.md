@@ -23,7 +23,7 @@ points at GitHub Pages (four A records, `www` CNAME).
 | `CNAME` | Custom domain |
 | `_config.yml` | Keeps `README.md`, `CLAUDE.md` and `tools/` off the live site |
 | `tools/strip-phone.mjs` | Removes the phone number from a resume PDF using Scrub's core in `../vibe/pdf-text-remover` |
-| `tools/render-images.mjs`, `tools/og.html` | Redraw the share image and icons with headless Chrome (puppeteer-core from `../vibe/pdf-text-remover`) |
+| `tools/render-images.mjs`, `tools/og.html` | Redraw the share image, the icons and the WebP copies of the Credly badges with headless Chrome (puppeteer-core from `../vibe/pdf-text-remover`) |
 | `assets/eggs.js` | The three hidden badge games (see Easter eggs) |
 | `tools/test-home.mjs` | End-to-end check of the home page: QR contents, the games, layout at 7 widths in light and dark |
 
@@ -35,10 +35,11 @@ points at GitHub Pages (four A records, `www` CNAME).
 - **Certification passed:** earned badges are the real Credly images. The user's
   public profile is `https://www.credly.com/users/jigarhirani/badges.json`; take the
   new badge's `image_url` and `id` from it. Save the image at 360 px
-  (`sips -Z 360`) in `assets/badges/`, then update both pages, which use different
-  markup. Home (`index.html`): the Splunk path sits three in one row, highest level
-  first (Admin, Power User, User); an earned one is `<a class="c-img">` around the
-  `<img>` plus `<a class="when"><span>Earned Mon YYYY</span><span>Verify&nbsp;↗</span></a>`,
+  (`sips -Z 360`) in `assets/badges/` and run `node tools/render-images.mjs`, which
+  also writes a 296px WebP of every badge (a third of the size). Then update both
+  pages, which use different markup. Home (`index.html`, uses the `.webp`): the Splunk
+  path sits three in one row, highest level first (Admin, Power User, User); an
+  earned one is `<a class="c-img">` around the `<img>` plus `<a class="when"><span>Earned Mon YYYY</span><span>Verify&nbsp;↗</span></a>`,
   one in progress is `<span class="c-img todo">`. Cribl is the `<p class="also">` line
   below the row. Add the credential to the `hasCredential` list in the JSON-LD too.
   Portfolio (`portfolio/index.html`): `<li class="badge earned">` with
@@ -99,6 +100,13 @@ its HTML. Run `node tools/test-home.mjs` after touching the badge or the eggs.
 Green, chosen 2026-10-29 over indigo and amber: it reads as Splunk and as
 "healthy" in monitoring. Tokens are the two `:root` blocks at the top of
 `site.css`; the favicon's dot uses the dark-mode green.
+
+## Hosting limits
+
+GitHub Pages sends `Cache-Control: max-age=600` for every file and it cannot be
+changed, so PageSpeed's "Use efficient cache lifetimes" will always show. Fixing
+it needs a CDN in front (e.g. Cloudflare). Lighthouse scores on 2026-11-04 after the
+fixes: 98–100 performance, 100 accessibility, best practices and SEO.
 
 ## Pending
 
